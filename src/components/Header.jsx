@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
 
-const Header = () => {
+const Header = ({ onCarritoClick, carritoCount }) => {
     return (
-        <header >
+        <header>
             <nav className="header-nav">
                 <div className="logo">
                     <Link to="/">AMERICAN BRANDS</Link>
@@ -24,9 +24,14 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <div className="shopping-bag" id="carrito-icon">
+                    <div
+                        className="shopping-bag"
+                        id="carrito-icon"
+                        onClick={onCarritoClick}
+                        style={{ cursor: "pointer" }}
+                    >
                         <i className="fas fa-shopping-bag"></i>
-                        <span className="carrito-count">0</span>
+                        <span className="carrito-count">{carritoCount}</span>
                     </div>
                 </div>
             </nav>
@@ -77,7 +82,6 @@ const Header = () => {
                     </ul>
                 </div>
 
-                {/* 👇 Estos ahora también son menu-item, aunque sin dropdown */}
                 <div className="menu-item">
                     <Link to="/ofertas">OFERTAS RELÁMPAGO</Link>
                 </div>

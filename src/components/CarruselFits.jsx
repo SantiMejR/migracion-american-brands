@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import '../styles/CarruselFits.css';
 
-import palazo from '../img_Carrusel_Fits/palazo.png';
-import oficinaCasual from '../img_Carrusel_Fits/oficina casual3.jpg';
-import pantalonAncho from '../img_Carrusel_Fits/Pantalón ancho.jpeg'; 
-import polerabasica from '../img_Carrusel_Fits/polera basica.jpg';
-import oficinaCasual2 from '../img_Carrusel_Fits/oficina casual2.jpg';
-import oficinaCasual3 from '../img_Carrusel_Fits/oficina casual1.jpg';
+import oficina from '../assets/oficina casual3.jpg';
+import oficinacasual from '../assets/oficina casual2.webp';
+import oficinacasual3 from '../assets/oficina casual1.jpg';
+import palazo from '../assets/palazo.png';
+import pantalon from '../assets/Pantalón ancho.jpeg';
+import polerabroncon from '../assets/polerabronco.jpg';
 
-const CarruselFits = () => {
+const CarruselFits = ({ agregarAlCarrito }) => {
   const slides = [
     {
       titulo: "Palazzo",
       subtitulo: "NUEVOS FITS",
       descripcion: "Alargan y estilizan visualmente nuestra figura. De pierna ancha desde la cadera hasta el final.",
-      imagen: "../img_Carrusel_Fits/palazo.png",
+      imagen: palazo,
       marcaAgua: "palazo",
       precio: 120
     },
@@ -22,7 +22,7 @@ const CarruselFits = () => {
       titulo: "Oficina Casual",
       subtitulo: "NUEVOS FITS",
       descripcion: "Pantalón ajustado que realza la figura. Perfecto para un look moderno y casual.",
-      imagen: "../img_Carrusel_Fits/oficina casual3.jpg",
+      imagen: oficina,
       marcaAgua: "skinny",
       precio: 90
     },
@@ -30,7 +30,7 @@ const CarruselFits = () => {
       titulo: "Pantalón Ancho",
       subtitulo: "NUEVOS FITS",
       descripcion: "Comodidad y estilo en un solo diseño, con pierna amplia desde la cintura.",
-      imagen: "../img_Carrusel_Fits/Pantalón ancho1.jpeg",
+      imagen: pantalon,
       marcaAgua: "wide leg",
       precio: 100
     }
@@ -46,6 +46,10 @@ const CarruselFits = () => {
     setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
   };
 
+  const handleComprar = (slide) => {
+    agregarAlCarrito(slide);
+  };
+
   return (
     <section className="nuevo-fit-carrusel">
       <div className="slides">
@@ -58,14 +62,15 @@ const CarruselFits = () => {
               <h3 className="subtitulo">{slide.subtitulo}</h3>
               <h1 className="titulo">{slide.titulo}</h1>
               <p className="descripcion">{slide.descripcion}</p>
-              <a
-                href="#"
+              <p className="precio" style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 12 }}>
+                ${slide.precio}
+              </p>
+              <button
                 className="boton-comprar"
-                data-nombre={slide.titulo}
-                data-precio={slide.precio}
+                onClick={() => handleComprar(slide)}
               >
                 COMPRA AQUÍ
-              </a>
+              </button>
             </div>
             <div className="nuevo-fit-imagen">
               <img src={slide.imagen} alt={slide.titulo} />
@@ -74,9 +79,8 @@ const CarruselFits = () => {
           </div>
         ))}
       </div>
-      
-      <button className="prev" onClick={prevSlide}>Prev</button>
-      <button className="next" onClick={nextSlide}>Next</button>
+      <button className="prev" onClick={prevSlide}>Anterior</button>
+      <button className="next" onClick={nextSlide}>Siguiente</button>
     </section>
   );
 };
